@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import myIcon from './icon.jpeg';
+import myIcon from './icon.svg';
 
 const App = () => (
   <div>
