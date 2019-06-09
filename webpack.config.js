@@ -58,7 +58,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.svg$/i,
+        test: /\.svg$/,
         use: [
           {
             loader: 'url-loader',
@@ -70,10 +70,5 @@ module.exports = {
         ],
       },
     ],
-  },
-  externals: {
-    'react/addons': true,
-    'react/lib/ReactContext': true,
-    'react/lib/ExecutionEnvironment': true,
   },
 };
