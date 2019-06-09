@@ -13,7 +13,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Caching'
+      title: 'zillow_assignment',
+      template: 'template/template.html',
+      hash: true
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
@@ -47,6 +49,12 @@ module.exports = {
             },
           },
           'css-loader',
+        ]
+      },
+      {
+        test: /\.(png|jpeg|jpg|gif)$/,
+        use: [
+          'file-loader'
         ]
       }
     ],
