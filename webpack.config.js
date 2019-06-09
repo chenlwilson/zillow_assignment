@@ -1,13 +1,23 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: [
+      './src/index.js',
+      './styles/main.scss'
+    ]
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Caching'
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].css"
     })
   ],
   output: {
@@ -26,7 +36,19 @@ module.exports = {
           },
         },
       },
-
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: './',
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
+        ]
+      }
     ],
   },
   externals: {
