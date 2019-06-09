@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import myIcon from './icon.jpeg';
 
 const App = () => (
   <div>
     <div>Hello World!</div>
-    <img src='icon.png'></img>
   </div>
 )
 
