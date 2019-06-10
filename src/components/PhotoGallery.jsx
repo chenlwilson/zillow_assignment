@@ -11,20 +11,21 @@ class PhotoGallery extends React.Component {
       photoArray: [],
       index: 0,
       direction: null,
-    }
+    };
   }
 
   componentDidMount() {
-    let array = [];
-    for (var i = 1; i <= this.props.slideNum; i++) {
+    const { slideNum } = this.props;
+    const array = [];
+    for (let i = 1; i <= slideNum; i += 1) {
       array.push({
         url: `images/${i}.jpg`,
-        caption: `Photo ${i} Caption Text`
-      })
+        caption: `Photo ${i} Caption Text`,
+      });
     }
     this.setState({
-      photoArray: array
-    })
+      photoArray: array,
+    });
   }
 
   handleSelect(selectedIndex, e) {
@@ -43,19 +44,16 @@ class PhotoGallery extends React.Component {
         direction={direction}
         onSelect={this.handleSelect}
       >
-        {photoArray.map(photo =>
+        {photoArray.map(photo => (
           <Carousel.Item>
-            <img
-              src={photo.url}
-              alt={photo.caption}
-            />
+            <img src={photo.url} alt={photo.caption} />
             <Carousel.Caption>
               <p>{photo.caption}</p>
             </Carousel.Caption>
           </Carousel.Item>
-          )}
+        ))}
       </Carousel>
-    )
+    );
   }
 }
 
