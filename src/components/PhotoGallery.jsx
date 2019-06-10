@@ -1,26 +1,62 @@
 import React from 'react';
-import Photo from './Photo.jsx';
+import { Carousel } from 'react-bootstrap';
 
-const PhotoGallery = (props) => {
-  let photoArray = [];
-  for (var i = 1; i <= props.slideNum; i++) {
-    photoArray.push({
-      index: i,
-      caption: `Photo ${i} Caption Text`
+class PhotoGallery extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
+      photoArray: [],
+      index: 0,
+      direction: null,
+    }
+  }
+
+  componentDidMount() {
+    let array = [];
+    for (var i = 1; i <= this.props.slideNum; i++) {
+      array.push({
+        url: `images/${i}.jpg`,
+        caption: `Photo ${i} Caption Text`
+      })
+    }
+    this.setState({
+      photoArray: array
+    })
+  }
+
+  handleSelect(selectedIndex, e) {
+    this.setState({
+      index: selectedIndex,
+      direction: e.direction,
     });
   }
 
-  return (
-    <div className="slideshow-container">
-      {photoArray.map((photo) =>
-        <Photo
-        key={`${photo.caption}-${photo.index}`}
-        index={photo.index}
-        caption={photo.caption}
-        total={props.slideNum} />
-      )}
-    </div>
-  )
+  render() {
+    const { index, direction, photoArray } = this.state;
+
+    return (
+      <Carousel
+        activeIndex={index}
+        direction={direction}
+        onSelect={this.handleSelect}
+      >
+        {photoArray.map(photo =>
+          <Carousel.Item>
+            <img
+              src={photo.url}
+              alt={photo.caption}
+            />
+            <Carousel.Caption>
+              <p>{photo.caption}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          )}
+      </Carousel>
+    )
+  }
 }
 
 export default PhotoGallery;
