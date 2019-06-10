@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import myIcon from './icon.svg';
-
-const App = () => (
-  <div>
-    <div>Hello World!</div>
-  </div>
-)
+import PhotoGallery from './components/PhotoGallery.jsx';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-)
+  <PhotoGallery slideNum={10} />,
+  document.getElementById('app'),
+);
